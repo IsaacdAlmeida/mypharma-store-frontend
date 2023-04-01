@@ -1,6 +1,11 @@
 import { ProductCard } from '../components/cards/ProductCard';
 import Header from '../components/headers/Header';
-import { Grid, VStack, useColorModeValue } from '@chakra-ui/react';
+import { Grid, VStack } from '@chakra-ui/react';
+import { useState } from 'react';
+import { InputWithIcon } from '../components/forms/InputWithIcon';
+import { SearchIcon } from '@chakra-ui/icons';
+// import { useSelector } from 'react-redux';
+// import type { RootState } from '../redux/store';
 
 export function Home() {
   const mockProduct = [
@@ -54,13 +59,30 @@ export function Home() {
     },
   ];
 
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearch = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(target.value);
+  };
+
+  const products = mockProduct.filter(product =>
+    product.name.toLowerCase().includes(searchText.toLowerCase()),
+  );
+
   return (
     <div>
       <Header />
+      <InputWithIcon
+        icon={<SearchIcon />}
+        type="text"
+        value={searchText}
+        onChange={handleSearch}
+        placeholder='Buscar Produto'
+      />
       <div>
         <VStack
           spacing={4}
-          pt="3" bg={useColorModeValue('gray.100', 'blackAlpha.100')}
+          pt="3" 
         >
           <Grid
             templateColumns=
@@ -71,7 +93,7 @@ export function Home() {
             margin="0 auto"
           >
             {
-              mockProduct.map((item) => (
+              products.map((item) => (
                 <ProductCard
                   key={item.name}
                   imageURL={item.image}

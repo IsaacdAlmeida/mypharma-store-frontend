@@ -27,10 +27,11 @@ export function ProductCard({
   productPrice,
   productId }: ProductCardProps) {
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+    <Flex p={50} w="full" alignItems="center" justifyContent="center"
+    >
       <Box
-        bg={useColorModeValue('white', 'gray.800')}
-        minW="300px"
+        bg={useColorModeValue('gray.100', 'blackAlpha.100')}
+        minW="180px"
         maxW="300px"
         borderWidth="1px"
         rounded="lg"
