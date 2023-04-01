@@ -24,6 +24,7 @@ function Header() {
       py="2"
       px="3"
       bg={useColorModeValue('blue.50', 'gray.900')}
+      overflow="hidden"
     >
       <Box>
         <Heading>
