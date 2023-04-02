@@ -27,7 +27,7 @@ export function ProductCard({
   productPrice,
   productId }: ProductCardProps) {
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center"
+    <Flex p={30} w="full" alignItems="center" justifyContent="center"
     >
       <Box
         bg={useColorModeValue('gray.100', 'blackAlpha.100')}
@@ -47,6 +47,7 @@ export function ProductCard({
             roundedTop="lg"
             boxSize="300"
             fallbackSrc='https://via.placeholder.com/500'
+            objectFit="cover"
           />
         </Link>
 
