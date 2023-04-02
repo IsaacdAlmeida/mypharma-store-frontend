@@ -7,10 +7,12 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { MenuDrawer } from '../components/sidebar/MenuDrawer';
 import { FilterList } from '../components/forms/FilterList';
 import type { RootState } from '../redux/store';
-import { useAppSelector } from '../hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../hooks/hooks';
 import { PageLoading } from '../components/loaders/PageLoading';
+import { addToCart } from '../redux/reducers/cartSlice';
 
 export function Home() {
+  const dispatch = useAppDispatch();
 
   const productList = useAppSelector((
     state: RootState) => state.products.arrayOfProducts);
@@ -56,6 +58,11 @@ export function Home() {
       product.productName.toLowerCase().includes(searchText.toLowerCase()))
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .sort(sortFunctions[selectedFilter as SortType] || ((a, b) => 0));
+  
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart({ ...product, quantity: 1 }));
+  };
+  
 
   return (
     <div>
@@ -101,6 +108,7 @@ export function Home() {
                         productPrice={item.price}
                         productCategory={item.category}
                         productId={item._id}
+                        onAddToCart={() => handleAddToCart(item)}
                       />
                     ))
                   }

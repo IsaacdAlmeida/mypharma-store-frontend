@@ -18,6 +18,7 @@ interface ProductCardProps {
   productCategory: string;
   productPrice: number;
   productId: string;
+  onAddToCart: () => void;
 }
 
 export function ProductCard({
@@ -25,7 +26,8 @@ export function ProductCard({
   productName,
   productCategory,
   productPrice,
-  productId }: ProductCardProps) {
+  productId,
+  onAddToCart }: ProductCardProps) {
   return (
     <Flex p={30} w="full" alignItems="center" justifyContent="center"
     >
@@ -86,7 +88,7 @@ export function ProductCard({
                 placement={'top'}
                 color={'gray.800'}
                 fontSize={'1.2em'}>
-                <Button variant="ghost">
+                <Button variant="ghost" onClick={onAddToCart}>
                   <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
                 </Button>
               </Tooltip>
