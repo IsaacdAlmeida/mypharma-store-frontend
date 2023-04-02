@@ -5,7 +5,7 @@ function ToggleColorMode() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Button onClick={toggleColorMode} bg="whiteAlpha.100">
+    <Button onClick={toggleColorMode} bg="whiteAlpha.100" maxW="40px">
       {colorMode === 'dark' 
         ? <SunIcon color="orange.400" /> : <MoonIcon color="gray" />}
     </Button>

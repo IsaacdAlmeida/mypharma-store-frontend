@@ -2,7 +2,7 @@ import { ProductCard } from '../components/cards/ProductCard';
 import Header from '../components/headers/Header';
 import { Grid, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
-import { InputWithIcon } from '../components/forms/InputWithIcon';
+import { SearchInput } from '../components/forms/SearchInput';
 import { SearchIcon } from '@chakra-ui/icons';
 // import { useSelector } from 'react-redux';
 // import type { RootState } from '../redux/store';
@@ -72,7 +72,7 @@ export function Home() {
   return (
     <div>
       <Header />
-      <InputWithIcon
+      <SearchInput
         icon={<SearchIcon />}
         type="text"
         value={searchText}

@@ -6,7 +6,7 @@ import {
 import { IconProps } from '@chakra-ui/icons';
 import { ReactElement } from 'react';
 
-interface InputWithIconProps {
+interface SearchInputProps {
   icon: ReactElement<IconProps>;
   placeholder: string;
   type: string;
@@ -14,13 +14,13 @@ interface InputWithIconProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function InputWithIcon({
+export function SearchInput({
   icon,
   placeholder,
   type,
   value,
   onChange,
-}:InputWithIconProps) {
+}:SearchInputProps) {
   return (
     <Box
       display="flex"
@@ -29,6 +29,7 @@ export function InputWithIcon({
       justifyContent="center"
       width="1200px"
       margin="0 auto"
+      pt="1rem"
     >
       <InputGroup
         size="md"
