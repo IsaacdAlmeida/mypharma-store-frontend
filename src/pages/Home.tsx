@@ -4,6 +4,7 @@ import { Grid, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { SearchInput } from '../components/forms/SearchInput';
 import { SearchIcon } from '@chakra-ui/icons';
+import { MenuDrawer } from '../components/sidebar/MenuDrawer';
 // import { useSelector } from 'react-redux';
 // import type { RootState } from '../redux/store';
 
@@ -60,18 +61,31 @@ export function Home() {
   ];
 
   const [searchText, setSearchText] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+
 
   const handleSearch = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(target.value);
   };
 
-  const products = mockProduct.filter(product =>
+  const filteredProducts = selectedCategory
+    ? mockProduct.filter(product => product.category === selectedCategory)
+    : mockProduct;
+
+  const products = filteredProducts.filter(product =>
     product.name.toLowerCase().includes(searchText.toLowerCase()),
   );
 
   return (
     <div>
       <Header />
+      <MenuDrawer
+        buttonName='Categorias'
+        headerText='Categorias'
+        categories={mockProduct.map(item => item.category)}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
       <SearchInput
         icon={<SearchIcon />}
         type="text"
