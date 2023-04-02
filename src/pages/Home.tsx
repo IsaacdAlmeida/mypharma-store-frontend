@@ -1,10 +1,11 @@
 import { ProductCard } from '../components/cards/ProductCard';
-import Header from '../components/headers/Header';
+import { Header } from '../components/headers/Header';
 import { Grid, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { SearchInput } from '../components/forms/SearchInput';
 import { SearchIcon } from '@chakra-ui/icons';
 import { MenuDrawer } from '../components/sidebar/MenuDrawer';
+import { FilterList } from '../components/forms/FilterList';
 // import { useSelector } from 'react-redux';
 // import type { RootState } from '../redux/store';
 
@@ -60,21 +61,45 @@ export function Home() {
     },
   ];
 
+  interface Product {
+    id: string;
+    name: string;
+    price: number;
+    category: string;
+    description: string;
+    image: string;
+  }
+
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-
+  const [selectedFilter, setSelectedFilter] = useState('');
 
   const handleSearch = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(target.value);
+  };
+
+  const handleFilterChange = (filterValue: string) => {
+    setSelectedFilter(filterValue);
   };
 
   const filteredProducts = selectedCategory
     ? mockProduct.filter(product => product.category === selectedCategory)
     : mockProduct;
 
-  const products = filteredProducts.filter(product =>
-    product.name.toLowerCase().includes(searchText.toLowerCase()),
-  );
+  const sortFunctions = {
+    'asc': (a: Product, b:Product) => a.name.localeCompare(b.name),
+    'desc': (a: Product, b:Product) => b.name.localeCompare(a.name),
+    'price-asc': (a: Product, b:Product) => a.price - b.price,
+    'price-desc': (a: Product, b:Product) => b.price - a.price,
+  };
+
+  type SortType = keyof typeof sortFunctions;
+
+  const products = filteredProducts
+    .filter(product =>
+      product.name.toLowerCase().includes(searchText.toLowerCase()))
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .sort(sortFunctions[selectedFilter as SortType] || ((a, b) => 0));
 
   return (
     <div>
@@ -86,6 +111,7 @@ export function Home() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
+      <FilterList onFilterChange={handleFilterChange} />
       <SearchInput
         icon={<SearchIcon />}
         type="text"
@@ -125,12 +151,7 @@ export function Home() {
   );
 }
 
-
-// - search por nome do produto
 // - tela de detalhes do produtos -> Página de detalhes do produtos
-// - filtro por categoria (ex: frios, laticínios) -> SideBar com as categoria
-// - ordenação (ex: menor preço, maior preço, nome) -> Botão de filtro/Popover?
 // - botão de adicionar e remover do carrinho de compras // dentro do card
 // - carrinho de compras (não é necessário implementar checkout) // pagina
 //   apenas valor total no carrinho // checkout com total no carrinho
-// Backend com Node publicado:

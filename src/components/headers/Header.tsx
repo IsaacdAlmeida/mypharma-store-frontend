@@ -15,7 +15,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import { NavLink as ReachLink } from 'react-router-dom';
 import ToggleColorMode from '../buttons/ToggleColorMode';
 
-function Header() {
+export function Header() {
   return (
     <Flex
       minWidth="max-content"
@@ -63,5 +63,3 @@ function Header() {
     </Flex>
   );
 }
-
-export default Header;
