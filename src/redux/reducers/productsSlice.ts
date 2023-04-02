@@ -3,12 +3,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 interface Product {
-  id: string;
-  name: string;
+  _id: string;
+  productName: string;
   price: number;
   category: string;
   description: string;
-  image: string;
+  productImageURL: string;
 }
 
 interface ProductState {
