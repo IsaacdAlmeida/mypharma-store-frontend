@@ -52,6 +52,7 @@ export function MainCart() {
                     price={item.price * item.quantity}
                     quantity={item.quantity}
                     onClickDelete={() => dispatch(removeFromCart(item._id))}
+                    id={item._id}
                   />
                 ))
               )

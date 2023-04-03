@@ -8,7 +8,9 @@ import {
   Text,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
+import { useAppDispatch } from '../../hooks/hooks';
 import { QuantityPicker } from './QuantityPicker';
+import { updateQuantity } from '../../redux/reducers/cartSlice';
 
 interface CartItemProps {
   name: string;
@@ -16,6 +18,7 @@ interface CartItemProps {
   image: string
   price: number;
   onClickDelete?: () => void;
+  id: string;
 }
 
 export function CartItem({
@@ -24,7 +27,14 @@ export function CartItem({
   price,
   onClickDelete,
   image,
+  id,
 }: CartItemProps) {
+  const dispatch = useAppDispatch();
+
+  const handleQuantityChange = (value: number) => {
+    dispatch(updateQuantity({ id, quantity: value }));
+  };
+
   return (
     <Flex
       direction={{ base: 'column', md: 'row' }}
@@ -61,9 +71,10 @@ export function CartItem({
       >
         <QuantityPicker
           value={quantity}
-          onChange={() => {}}
+          onChange={handleQuantityChange}
           min={1}
           max={99}
+          id={id}
         />
         <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
           {`R$ ${price.toFixed(2)}`}
@@ -81,14 +92,15 @@ export function CartItem({
         justify="space-between"
         display={{ base: 'flex', md: 'none' }}
       >
-        <Link fontSize="sm" textDecor="underline">
+        <Link fontSize="sm" textDecor="underline" onClick={onClickDelete}>
           Delete
         </Link>
         <QuantityPicker
           value={quantity}
-          onChange={() => {}}
+          onChange={handleQuantityChange}
           min={1}
           max={99}
+          id={id}
         />
         <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
         {`R$ ${price.toFixed(2)}`}

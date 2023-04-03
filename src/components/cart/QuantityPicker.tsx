@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import { Button, HStack, Input, useNumberInput } from '@chakra-ui/react';
 
@@ -6,6 +7,7 @@ type QuantityPickerProps = {
   onChange: (value: number) => void;
   min?: number;
   max?: number;
+  id: string;
 };
 
 export const QuantityPicker = ({
@@ -14,6 +16,24 @@ export const QuantityPicker = ({
   min = 1,
   max = 999,
 }: QuantityPickerProps) => {
+  const [currentValue, setCurrentValue] = useState(value);
+      
+  const handleDecrement = () => {
+    if (currentValue > min) {
+      const newValue = currentValue - 1;
+      setCurrentValue(newValue);
+      onChange(newValue);
+    }
+  };
+
+  const handleIncrement = () => {
+    if (currentValue < max) {
+      const newValue = currentValue + 1;
+      setCurrentValue(newValue);
+      onChange(newValue);
+    }
+  };
+  
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       precision: 0,
@@ -26,24 +46,12 @@ export const QuantityPicker = ({
   const dec = getDecrementButtonProps();
   const input = getInputProps();
 
-  const handleDecrement = () => {
-    if (value > min) {
-      onChange(value - 1);
-    }
-  };
-
-  const handleIncrement = () => {
-    if (value < max) {
-      onChange(value + 1);
-    }
-  };
-
   return (
     <HStack maxW='160px'>
       <Button {...dec} onClick={handleDecrement}>
         <MinusIcon />
       </Button>
-      <Input {...input} />
+      <Input {...input} readOnly />
       <Button {...inc} onClick={handleIncrement}>
         <AddIcon />
       </Button>
