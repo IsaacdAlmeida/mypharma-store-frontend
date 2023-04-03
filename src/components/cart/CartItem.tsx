@@ -33,8 +33,8 @@ export function CartItem({
       <Flex direction="row" alignItems="center" width="full">
         <Image
           rounded="lg"
-          width="120px"
-          height="120px"
+          width="90px"
+          height="90px"
           fit="cover"
           src={image}
           alt={name}
@@ -46,7 +46,7 @@ export function CartItem({
             <Text
               fontWeight="medium"
               fontSize="lg"
-              overflow="hidden"
+              isTruncated
             >
               {name}
             </Text>

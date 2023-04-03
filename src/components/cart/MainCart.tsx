@@ -7,13 +7,16 @@ import {
   Stack,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { RootState } from '../../redux/store';
 import { NavLink as ReachLink } from 'react-router-dom';
 import { CartOrderSummary } from './CartOrderSummary';
 import { CartItem } from './CartItem';
+import { removeFromCart } from '../../redux/reducers/cartSlice';
 
 export function MainCart() {
+  const dispatch = useAppDispatch();
+
   const cartItems = useAppSelector((
     state: RootState) => state.cart.cartItems);
 
@@ -48,6 +51,7 @@ export function MainCart() {
                     name={item.productName}
                     price={item.price * item.quantity}
                     quantity={item.quantity}
+                    onClickDelete={() => dispatch(removeFromCart(item._id))}
                   />
                 ))
               )
