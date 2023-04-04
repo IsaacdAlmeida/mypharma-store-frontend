@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { ProductCard } from '../components/cards/ProductCard';
 import { Header } from '../components/headers/Header';
-import { Grid, VStack, Box, SimpleGrid, Center } from '@chakra-ui/react';
+import {
+  Grid,
+  VStack, Box, SimpleGrid, Center, useToast } from '@chakra-ui/react';
 import { SearchInput } from '../components/forms/SearchInput';
 import { SearchIcon } from '@chakra-ui/icons';
 import { MenuDrawer } from '../components/sidebar/MenuDrawer';
@@ -14,6 +16,7 @@ import { CartButton } from '../components/buttons/CartButton';
 
 export function Home() {
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const productList = useAppSelector((
     state: RootState) => state.products.arrayOfProducts);
@@ -62,6 +65,13 @@ export function Home() {
   
   const handleAddToCart = (product: Product) => {
     dispatch(addToCart({ ...product, quantity: 1 }));
+
+    toast({
+      title: 'Adicionado ao Carrinho',
+      description: `${product.productName} adicionado ao carrinho`,
+      status:'success',
+      duration: 3000,
+    });
   };
   
 
