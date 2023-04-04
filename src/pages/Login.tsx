@@ -1,7 +1,11 @@
+import { Header } from '../components/headers/Header';
+import { LoginForm } from '../components/forms/LoginForm';
+
 export function Login() {
   return (
     <div>
-      <h1>Login</h1>
+      <Header />
+      <LoginForm />
     </div>
   );
 }
