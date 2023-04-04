@@ -10,6 +10,7 @@ import {
   DrawerCloseButton,
   DrawerFooter,
 } from '@chakra-ui/react';
+import { BiCategory } from 'react-icons/bi';
 
 interface MenuDrawerProps {
   buttonName: string;
@@ -39,7 +40,16 @@ export function MenuDrawer({
 
   return (
     <>
-      <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+      <Button
+        ref={btnRef} 
+        colorScheme='teal' 
+        onClick={onOpen}
+        variant="solid"
+        leftIcon={<BiCategory />}
+        fontWeight='bold'
+        fontSize='md'
+        textTransform='uppercase'
+      >
         { buttonName }
       </Button>
       <Drawer
@@ -53,16 +63,20 @@ export function MenuDrawer({
           <DrawerCloseButton />
           <DrawerHeader>{headerText}</DrawerHeader>
 
-          <DrawerBody>
+          <DrawerBody
+            display="flex"
+            flexDirection="column"
+          >
           {categories
             .filter((category, index) => categories.indexOf(category) === index)
             .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
             .map((category) => (
               <Button
                 key={category}
-                variant="link"
+                variant="ghost"
                 onClick={() => handleCategoryClick(category)}
                 isActive={selectedCategory === category}
+                justifyContent="flex-start"
               >
                 {category}
               </Button>

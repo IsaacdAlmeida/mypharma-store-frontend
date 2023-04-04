@@ -27,7 +27,7 @@ export function SearchInput({
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      width="1200px"
+      width="800px"
       margin="0 auto"
       pt="1rem"
     >

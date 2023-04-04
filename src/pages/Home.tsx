@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ProductCard } from '../components/cards/ProductCard';
 import { Header } from '../components/headers/Header';
-import { Grid, VStack } from '@chakra-ui/react';
+import { Grid, VStack, Box, SimpleGrid, Center } from '@chakra-ui/react';
 import { SearchInput } from '../components/forms/SearchInput';
 import { SearchIcon } from '@chakra-ui/icons';
 import { MenuDrawer } from '../components/sidebar/MenuDrawer';
@@ -10,6 +10,7 @@ import type { RootState } from '../redux/store';
 import { useAppSelector, useAppDispatch } from '../hooks/hooks';
 import { PageLoading } from '../components/loaders/PageLoading';
 import { addToCart } from '../redux/reducers/cartSlice';
+import { CartButton } from '../components/buttons/CartButton';
 
 export function Home() {
   const dispatch = useAppDispatch();
@@ -70,15 +71,24 @@ export function Home() {
       {productList.length === 0
         ? <PageLoading />
         : (
-          <>
-            <MenuDrawer
-              buttonName='Categorias'
-              headerText='Categorias'
-              categories={productList.map(item => item.category)}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-            <FilterList onFilterChange={handleFilterChange} />
+          <Box>
+            <Center>
+              <SimpleGrid 
+                minChildWidth='220px' pt='16px' spacing='10px'
+                columns={3}
+                maxW='80%'
+              >
+                <MenuDrawer
+                  buttonName='Categorias'
+                  headerText='Categorias'
+                  categories={productList.map(item => item.category)}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                />
+                <FilterList onFilterChange={handleFilterChange} />
+                <CartButton />
+              </SimpleGrid>
+            </Center>
             <SearchInput
               icon={<SearchIcon />}
               type="text"
@@ -115,7 +125,7 @@ export function Home() {
                 </Grid>
             </VStack>
             </div>
-          </>
+          </Box>
         )
       }
     </div>

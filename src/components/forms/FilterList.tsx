@@ -16,6 +16,7 @@ export function FilterList({ onFilterChange }: FilterListProps) {
       icon={<BsFilter />}
       placeholder='Ordernar Por'
       onChange={handleFilterChange}
+      focusBorderColor={'teal.200'}
     >
       <option value='asc'>Nome: de A a Z</option>
       <option value='desc'>Nome: de Z a A</option>
