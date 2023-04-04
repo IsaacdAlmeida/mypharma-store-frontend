@@ -32,6 +32,7 @@ export function Header() {
             as={ReachLink} 
             to="/home" 
             style={{ textDecoration: 'none' }}
+            textColor="teal.200"
           >
             MyPharma Store
           </Link>
