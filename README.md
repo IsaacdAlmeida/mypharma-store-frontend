@@ -135,7 +135,7 @@ O arquivo raíz da aplicação React, responsável por configurar alguns element
 
 ## Deploy da Aplicação
 
-A aplicação também está disponível [nesse site](). O Deploy foi feito utilizando Vercel, o que permite o uso da aplicação por qualquer pessoa.
+A aplicação também está disponível [nesse site](https://mypharma.vercel.app/). O Deploy foi feito utilizando Vercel, o que permite o uso da aplicação por qualquer pessoa.
 
 ## Histórico de commits
 
