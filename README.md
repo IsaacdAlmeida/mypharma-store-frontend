@@ -46,7 +46,7 @@ Caso não utilize o docker, você precisará ter o [node](https://nodejs.org/en/
 Após instalação dos aplicativos acima você deverá clonar o repositório.
 
 ```bash
-git clone git@github.com:IsaacdAlmeida/desafio-frontend-posts.git
+git clone git@github.com:IsaacdAlmeida/mypharma-store-frontend.git
 ```
 
 Entre na pasta raiz do projeto e utilize o comando `npm install` para instalar as dependências do projeto.
