@@ -41,9 +41,9 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-async function fetchProductsToRedux() {
+function fetchProductsToRedux() {
   try {
-    const products = await getProducts();
+    const products = getProducts();
     store.dispatch(setProducts(products));
   } catch (error) {
     console.log(error);
